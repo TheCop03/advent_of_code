@@ -12,7 +12,7 @@ for mass in modules:
     fuel = math.floor(int(mass)/3) - 2;
     ext_fuel = math.floor(int(fuel)/3) - 2;
 
-    # Calculate the fuel required for the fuel itself
+    # Calculate the fuel required for the fuel itself until it is zero
     while (ext_fuel >= 0):
         fuel += ext_fuel;
         ext_fuel = math.floor(int(ext_fuel)/3) - 2;
