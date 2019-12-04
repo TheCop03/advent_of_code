@@ -7,6 +7,14 @@ with open('day3_data.txt') as file:
 # first_wire = ['R8','U5','L5','D3']
 # second_wire = ['U7','R6','D4','L4']
 
+def common_points(a, b):
+    a_set = set(a)
+    b_set = set(b)
+    if (a_set & b_set):
+        return a_set & b_set
+    else:
+        print("No common elements")
+
 def convert_to_xy(direction_list):
     # Position List
     xy_pos = []
@@ -36,16 +44,17 @@ def convert_to_xy(direction_list):
 first_pos = convert_to_xy(first_wire)
 second_pos = convert_to_xy(second_wire)
 
+intersections = common_points(first_pos, second_pos)
+
 # Check where the two wires intersect closest to the central point (0, 0)
 closest_intersection = 1000000000000000000000000000
-tot_steps = 1000000000000000000000000000
+lowest_steps = 1000000000000000000000000000
 
-for pos in first_pos:
-    if (pos in second_pos):
-        #if ((abs(pos[0]) + abs(pos[1])) < closest_intersection):
-            # closest_intersection = abs(pos[0]) + abs(pos[1])
-        if ((first_pos.index(pos) + second_pos.index(pos) + 2) < tot_steps):
-            tot_steps = first_pos.index(pos) + second_pos.index(pos) + 2
+for point in intersections:
+    if ((abs(point[0]) + abs(point[1])) < closest_intersection):
+        closest_intersection = abs(point[0]) + abs(point[1])
+    if ((first_pos.index(point) + second_pos.index(point) + 2) < lowest_steps):
+        lowest_steps = first_pos.index(point) + second_pos.index(point) + 2
 
-# print(closest_intersection)
-print(tot_steps)
+print(closest_intersection)
+print(lowest_steps)
